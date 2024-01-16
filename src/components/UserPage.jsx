@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-
 import UserService from "../services/user.service";
-import EventBus from "../common/EventBus";
+import EventRouter from "../common/EventRouter";
 
-const BoardUser = () => {
+const UserPage = () => {
   const [content, setContent] = useState("");
 
   useEffect(() => {
@@ -22,7 +21,7 @@ const BoardUser = () => {
         setContent(_content);
 
         if (error.response && error.response.status === 401) {
-          EventBus.dispatch("logout");
+          EventRouter.dispatch("logout");
         }
       }
     );
@@ -37,4 +36,4 @@ const BoardUser = () => {
   );
 };
 
-export default BoardUser;
+export default UserPage;

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-
 import UserService from "../services/user.service";
 
 const Home = () => {
@@ -23,13 +22,13 @@ const Home = () => {
 
   return (
     <div className="container">
-      
+      <header className="jumbotron">
         <img
           src="public\healthcareab 3.png" 
           alt="Description of the image"
-          style={{ width: "100%", height: "auto", marginTop: "60px"}} 
+          style={{ width: "100%", height: "auto" }} 
         />
-    
+      </header>
     </div>
   );
 };

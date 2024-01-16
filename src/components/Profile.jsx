@@ -5,8 +5,7 @@ const Profile = () => {
   const currentUser = AuthService.getCurrentUser();
 
   const handleChangeInfo = () => {
-    // Handle the logic for changing user information
-    // For example, you can redirect the user to a settings page
+  
     console.log("Change Info button clicked");
   };
 

@@ -2,16 +2,17 @@ import React, { useState, useEffect } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-
 import AuthService from "./services/auth.service";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Home from "./components/Home";
 import Profile from "./components/Profile";
-import BoardUser from "./components/BoardUser";
+import UserPage from "./components/UserPage";
 import MyBookings from "./components/MyBookings";
-import EventBus from "./common/EventBus";
+import EventRouter from "./common/EventRouter";
 import BookAppointment from "./components/BookAppointment";
+
+
 const App = () => {
   const [showModeratorBoard, setShowModeratorBoard] = useState(false);
   const [showAdminBoard, setShowAdminBoard] = useState(false);
@@ -24,12 +25,12 @@ const App = () => {
       setCurrentUser(user);
     }
 
-    EventBus.on("logout", () => {
+    EventRouter.on("logout", () => {
       logOut();
     });
 
     return () => {
-      EventBus.remove("logout");
+      EventRouter.remove("logout");
     };
   }, []);
 
@@ -129,7 +130,7 @@ const App = () => {
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/register" element={<Register />} />
           <Route exact path="/profile" element={<Profile />} />
-          <Route path="/user" element={<BoardUser />} />
+          <Route path="/user" element={<UserPage />} />
           <Route path="/mybookings" element={<MyBookings />} />
           <Route path="/bookAppointment" element={<BookAppointment />} />
         </Routes>
