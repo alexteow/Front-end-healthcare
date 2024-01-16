@@ -23,13 +23,13 @@ const Home = () => {
 
   return (
     <div className="container">
-      <header className="jumbotron">
+      
         <img
           src="public\healthcareab 3.png" 
           alt="Description of the image"
-          style={{ width: "100%", height: "auto" }} 
+          style={{ width: "100%", height: "auto", marginTop: "60px"}} 
         />
-      </header>
+    
     </div>
   );
 };

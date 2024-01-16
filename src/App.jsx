@@ -4,17 +4,14 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
 import AuthService from "./services/auth.service";
-
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Home from "./components/Home";
 import Profile from "./components/Profile";
 import BoardUser from "./components/BoardUser";
-import BoardModerator from "./components/BoardModerator";
-import BoardAdmin from "./components/BoardAdmin";
 import MyBookings from "./components/MyBookings";
 import EventBus from "./common/EventBus";
-
+import BookAppointment from "./components/BookAppointment";
 const App = () => {
   const [showModeratorBoard, setShowModeratorBoard] = useState(false);
   const [showAdminBoard, setShowAdminBoard] = useState(false);
@@ -25,8 +22,6 @@ const App = () => {
 
     if (user) {
       setCurrentUser(user);
-      setShowModeratorBoard(user.roles.includes("ROLE_MODERATOR"));
-      setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
     }
 
     EventBus.on("logout", () => {
@@ -47,7 +42,7 @@ const App = () => {
 
   return (
     <div>
-      <nav className="navbar navbar-expand navbar-dark bg-dark">
+      <nav className="navbar navbar-expand navbar-dark" style={{ backgroundColor: "#259ec8" }}>
         <Link to={"/"} className="navbar-brand">
           Healthcare
         </Link>
@@ -135,9 +130,8 @@ const App = () => {
           <Route exact path="/register" element={<Register />} />
           <Route exact path="/profile" element={<Profile />} />
           <Route path="/user" element={<BoardUser />} />
-          <Route path="/mod" element={<BoardModerator />} />
-          <Route path="/admin" element={<BoardAdmin />} />
           <Route path="/mybookings" element={<MyBookings />} />
+          <Route path="/bookAppointment" element={<BookAppointment />} />
         </Routes>
       </div>
       

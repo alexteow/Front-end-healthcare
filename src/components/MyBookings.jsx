@@ -70,7 +70,14 @@ const MyBookings = () => {
             </p>
           </div>
         )}
-        <button onClick={handleChangeAppointment}>Change Appointment</button>
+        <button 
+         onClick={handleChangeAppointment}
+         style={{ backgroundColor: "#259ec8", color: "white", padding: "10px 20px", borderRadius: "5px", cursor: "pointer",marginTop: "20px" 
+              }}
+>
+              Change Appointment
+              </button>
+        
       </div>
 
       <div>

@@ -9,7 +9,6 @@ const doctors = [
   { id: 3, name: 'Dr. Eddie', category: 'Doctor' },
   { id: 4, name: 'Nurse Anne', category: 'Nurse' },
   { id: 5, name: 'Nurse John', category: 'Nurse' },
-  
 ];
 
 const generateRandomTimes = () => {
@@ -27,7 +26,7 @@ doctors.forEach((doctor) => {
   doctor.availableTimes = generateRandomTimes();
 });
 
-const BookingForm = ({ onSubmit, nextStep }) => {
+const BookAppointmentForm = ({ onSubmit, nextStep }) => {
   const [symptoms, setSymptoms] = useState('');
 
   const handleSymptomsChange = (e) => {
@@ -37,7 +36,7 @@ const BookingForm = ({ onSubmit, nextStep }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit({ symptoms });
-    nextStep(); 
+    nextStep();
   };
 
   return (
@@ -58,14 +57,14 @@ const BookingForm = ({ onSubmit, nextStep }) => {
   );
 };
 
-const BookingModal = ({ isOpen, onClose, bookingDateTime, selectedDoctor, patientInfo }) => {
+const BookAppointmentModal = ({ isOpen, onClose, bookingDateTime, selectedDoctor, patientInfo }) => {
   const formatDateTime = (date) => {
     return date.toLocaleString('en-GB', {
-      year: 'numeric', 
-      month: '2-digit', 
-      day: '2-digit', 
-      hour: '2-digit', 
-      minute: '2-digit', 
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
       hour12: false
     });
   };
@@ -108,7 +107,7 @@ const Calendar = ({ selectedDate, handleDateChange }) => {
   );
 };
 
-const BookingAppointment = () => {
+const BookAppointment = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [selectedTime, setSelectedTime] = useState('');
   const [selectedGeneralDoctor, setSelectedGeneralDoctor] = useState(null);
@@ -141,7 +140,7 @@ const BookingAppointment = () => {
   const handleSubmit = (bookingDetails) => {
     setTimeout(() => {
       setIsBookingSuccessful(true);
-      openModal(); 
+      openModal();
     }, 1000);
 
     console.log('Booking details:', {
@@ -178,58 +177,57 @@ const BookingAppointment = () => {
 
   return (
     <div style={bookingContainerStyle}>
-      <h1>Healthcare bookingsystem</h1>
+      <h1>Healthcare booking system</h1>
       {step === 1 && (
-  <>
-    <div className='dropdown-wrapper'> {}
-      <label>
-        Choose a general practitioner:
-        <select onChange={handleGeneralDoctorChange}>
-          <option value="">Choose a doctor</option>
-          {doctors.filter(doctor => doctor.category === 'Doctor').map((doctor) => (
-            <option key={doctor.id} value={doctor.id}>{doctor.name}</option>
-          ))}
-        </select>
-      </label>
-    </div>
-    <div className='dropdown-wrapper2'> {}
-      <label>
-        Choose a nurse:
-        <select onChange={handleDistrictNurseChange}>
-          <option value="">Choose a nurse</option>
-          {doctors.filter(doctor => doctor.category === 'Nurse').map((doctor) => (
-            <option key={doctor.id} value={doctor.id}>{doctor.name}</option>
-          ))}
-        </select>
-      </label>
-    </div>
-    <button onClick={nextStep}>Next</button>
-  </>
-)}
+        <>
+          <div className='dropdown-wrapper'>
+            <label>
+              Choose a general practitioner:
+              <select onChange={handleGeneralDoctorChange}>
+                <option value="">Choose a doctor</option>
+                {doctors.filter(doctor => doctor.category === 'Doctor').map((doctor) => (
+                  <option key={doctor.id} value={doctor.id}>{doctor.name}</option>
+                ))}
+              </select>
+            </label>
+          </div>
+          <div className='dropdown-wrapper2'>
+            <label>
+              Choose a nurse:
+              <select onChange={handleDistrictNurseChange}>
+                <option value="">Choose a nurse</option>
+                {doctors.filter(doctor => doctor.category === 'Nurse').map((doctor) => (
+                  <option key={doctor.id} value={doctor.id}>{doctor.name}</option>
+                ))}
+              </select>
+            </label>
+          </div>
+          <button onClick={nextStep}>Next</button>
+        </>
+      )}
       {step === 2 && (
-  <>
-    <DatePicker 
-      selected={selectedDate} 
-      onChange={handleDateChange} 
-      dateFormat="dd-MM-yyyy" 
-    />
-    <TimePicker
-      availableTimes={(selectedGeneralDoctor || selectedDistrictNurse).availableTimes}
-      handleTimeSelection={handleTimeSelection}
-    />
-    <button onClick={prevStep}>Back</button>
-    <button onClick={() => nextStep()}>Next</button>
-  </>
-)}
-
+        <>
+          <DatePicker
+            selected={selectedDate}
+            onChange={handleDateChange}
+            dateFormat="dd-MM-yyyy"
+          />
+          <TimePicker
+            availableTimes={(selectedGeneralDoctor || selectedDistrictNurse).availableTimes}
+            handleTimeSelection={handleTimeSelection}
+          />
+          <button onClick={prevStep}>Back</button>
+          <button onClick={() => nextStep()}>Next</button>
+        </>
+      )}
       {step === 3 && (
         <>
-          <BookingForm onSubmit={handleSubmit} nextStep={nextStep} />
+          <BookAppointmentForm onSubmit={handleSubmit} nextStep={nextStep} />
           <button onClick={prevStep}>Back</button>
         </>
       )}
       {step === 4 && isBookingSuccessful && (
-        <BookingModal
+        <BookAppointmentModal
           isOpen={modalIsOpen}
           onClose={closeModal}
           bookingDateTime={selectedDate && selectedTime && new Date(`${selectedDate.toLocaleDateString()} ${selectedTime}`)}
@@ -241,4 +239,4 @@ const BookingAppointment = () => {
   );
 };
 
-export default BookingAppointment;
+export default BookAppointment;
